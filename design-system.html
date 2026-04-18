@@ -1,0 +1,947 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dentscape Design System</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet">
+<style>
+  :root {
+    /* Primary (Teal) */
+    --primary-ultrapale: hsl(180, 33%, 97%);
+    --primary-pale: hsl(180, 41%, 93%);
+    --primary-lightest: hsl(183, 39%, 84%);
+    --primary-lighter: hsl(184, 36%, 68%);
+    --primary-light: hsl(182, 36%, 52%);
+    --primary-base: hsl(182, 71%, 36%);
+    --primary-dark: hsl(183, 69%, 27%);
+    --primary-darker: hsl(184, 69%, 18%);
+    --primary-darkest: hsl(185, 73%, 14%);
+
+    /* Success (Green) */
+    --success-ultrapale: hsl(140, 33%, 97%);
+    --success-pale: hsl(140, 41%, 93%);
+    --success-lightest: hsl(140, 36%, 84%);
+    --success-lighter: hsl(120, 29%, 68%);
+    --success-light: hsl(122, 33%, 52%);
+    --success-base: hsl(123, 70%, 36%);
+    --success-dark: hsl(123, 69%, 27%);
+    --success-darker: hsl(125, 69%, 18%);
+    --success-darkest: hsl(126, 73%, 14%);
+
+    /* Warning (Orange) */
+    --warning-ultrapale: hsl(40, 100%, 98%);
+    --warning-pale: hsl(37, 89%, 95%);
+    --warning-lightest: hsl(36, 93%, 88%);
+    --warning-lighter: hsl(33, 94%, 77%);
+    --warning-light: hsl(31, 93%, 65%);
+    --warning-base: hsl(29, 92%, 53%);
+    --warning-dark: hsl(29, 77%, 40%);
+    --warning-darker: hsl(24, 79%, 31%);
+    --warning-darkest: hsl(22, 77%, 21%);
+
+    /* Error (Red) */
+    --error-ultrapale: hsl(6, 100%, 98%);
+    --error-pale: hsl(6, 75%, 95%);
+    --error-lightest: hsl(4, 63%, 88%);
+    --error-lighter: hsl(4, 65%, 75%);
+    --error-light: hsl(4, 61%, 63%);
+    --error-base: hsl(4, 71%, 51%);
+    --error-dark: hsl(4, 70%, 38%);
+    --error-darker: hsl(4, 65%, 26%);
+    --error-darkest: hsl(4, 65%, 19%);
+
+    /* Neutral (Gray) */
+    --neutral-ultrapale: hsl(0, 0%, 98%);
+    --neutral-pale: hsl(0, 0%, 96%);
+    --neutral-lightest: hsl(0, 0%, 87%);
+    --neutral-lighter: hsl(0, 0%, 75%);
+    --neutral-light: hsl(0, 0%, 63%);
+    --neutral-base: hsl(0, 0%, 50%);
+    --neutral-dark: hsl(0, 0%, 38%);
+    --neutral-darker: hsl(0, 0%, 30%);
+    --neutral-darkest: hsl(0, 0%, 13%);
+    --neutral-black: hsl(0, 0%, 0%);
+    --neutral-white: hsl(0, 0%, 100%);
+
+    /* Shadows */
+    --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+    --shadow-default: -1px -1px 4px 0 rgb(0 0 0 / 0.06), 1px 1px 4px 0 rgb(0 0 0 / 0.06);
+    --shadow-md: -2px -2px 8px 0 rgb(0 0 0 / 0.05), 2px 2px 8px 0 rgb(0 0 0 / 0.06);
+    --shadow-lg: -2px -2px 12px 0 rgb(0 0 0 / 0.08), 4px 4px 12px 0 rgb(0 0 0 / 0.08);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: 'Inter', sans-serif;
+    background: #f5f5f5;
+    color: var(--neutral-darkest);
+    line-height: 1.5;
+  }
+
+  /* Layout */
+  .page { max-width: 1200px; margin: 0 auto; padding: 40px 32px; }
+  .page-title {
+    font-size: 32px; font-weight: 700;
+    margin-bottom: 8px;
+    color: var(--primary-base);
+  }
+  .page-subtitle { font-size: 14px; color: var(--neutral-dark); margin-bottom: 48px; }
+
+  .section { margin-bottom: 56px; }
+  .section-title {
+    font-size: 20px; font-weight: 600;
+    margin-bottom: 8px;
+    padding-bottom: 8px;
+    border-bottom: 2px solid var(--primary-pale);
+    color: var(--neutral-darkest);
+  }
+  .section-desc { font-size: 13px; color: var(--neutral-dark); margin-bottom: 24px; }
+  .subsection { margin-bottom: 32px; }
+  .subsection-title {
+    font-size: 14px; font-weight: 600;
+    margin-bottom: 12px;
+    color: var(--neutral-darker);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+
+  /* ─── Color Palette ─── */
+  .color-group { margin-bottom: 24px; }
+  .color-group-label { font-size: 13px; font-weight: 600; margin-bottom: 8px; color: var(--neutral-darker); }
+  .color-row { display: flex; gap: 4px; }
+  .color-swatch {
+    flex: 1; min-width: 0;
+    height: 64px;
+    border-radius: 8px;
+    display: flex; flex-direction: column;
+    align-items: center; justify-content: flex-end;
+    padding: 6px 4px;
+    font-size: 10px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: transform 0.15s, box-shadow 0.15s;
+    position: relative;
+  }
+  .color-swatch:hover {
+    transform: scale(1.08);
+    box-shadow: 0 4px 16px rgb(0 0 0 / 0.15);
+    z-index: 2;
+  }
+  .color-swatch .label { opacity: 0.85; }
+  .color-swatch .hex { font-size: 9px; opacity: 0.7; font-family: monospace; }
+  .color-swatch.dark-text .label, .color-swatch.dark-text .hex { color: var(--neutral-darkest); }
+  .color-swatch.light-text .label, .color-swatch.light-text .hex { color: var(--neutral-white); }
+
+  .copied-toast {
+    position: fixed; bottom: 32px; left: 50%; transform: translateX(-50%);
+    background: var(--neutral-darkest); color: white;
+    padding: 8px 20px; border-radius: 8px; font-size: 13px; font-weight: 500;
+    opacity: 0; transition: opacity 0.2s;
+    pointer-events: none; z-index: 100;
+  }
+  .copied-toast.show { opacity: 1; }
+
+  /* ─── Typography ─── */
+  .type-sample { margin-bottom: 16px; display: flex; align-items: baseline; gap: 16px; }
+  .type-label { font-size: 11px; color: var(--neutral-light); min-width: 100px; text-align: right; font-family: monospace; }
+
+  /* ─── Buttons ─── */
+  .btn-grid { display: flex; flex-wrap: wrap; gap: 12px; align-items: center; margin-bottom: 20px; }
+
+  .btn {
+    display: inline-flex; align-items: center; justify-content: center;
+    white-space: nowrap;
+    font-family: 'Inter', sans-serif;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.15s;
+    outline: none;
+  }
+  .btn:active { transform: scale(0.95); }
+  .btn:disabled { cursor: not-allowed; }
+
+  /* Sizes */
+  .btn-xs { height: 24px; font-size: 12px; border: 1px solid; border-radius: 4px; padding: 0 8px; gap: 4px; }
+  .btn-sm { height: 28px; font-size: 12px; border: 1px solid; border-radius: 6px; padding: 0 10px; gap: 6px; }
+  .btn-default { height: 32px; font-size: 14px; border: 1px solid; border-radius: 6px; padding: 0 12px; gap: 6px; }
+  .btn-md { height: 36px; font-size: 16px; border: 1px solid; border-radius: 6px; padding: 0 14px; gap: 6px; }
+  .btn-lg { height: 44px; font-size: 18px; border: 2px solid; border-radius: 8px; padding: 0 16px; gap: 8px; }
+
+  /* Variants */
+  .btn-primary {
+    background: var(--primary-base); color: white; border-color: transparent;
+    box-shadow: var(--shadow-sm);
+  }
+  .btn-primary:hover { background: var(--primary-light); }
+  .btn-primary:disabled { background: var(--neutral-lighter); color: white; }
+
+  .btn-outline {
+    background: white; color: var(--primary-base); border-color: var(--primary-base);
+    box-shadow: var(--shadow-sm);
+  }
+  .btn-outline:hover { background: var(--primary-pale); color: var(--primary-light); }
+  .btn-outline:disabled { background: var(--neutral-pale); color: var(--neutral-lighter); border-color: var(--neutral-lightest); }
+
+  .btn-secondary {
+    background: var(--primary-pale); color: var(--primary-base); border-color: transparent;
+    box-shadow: var(--shadow-sm);
+  }
+  .btn-secondary:hover { background: var(--primary-ultrapale); color: var(--primary-light); }
+  .btn-secondary:disabled { background: var(--neutral-pale); color: var(--neutral-lighter); }
+
+  .btn-secondary-gray {
+    background: var(--neutral-pale); color: var(--neutral-darker); border-color: transparent;
+    box-shadow: var(--shadow-sm);
+  }
+  .btn-secondary-gray:hover { opacity: 0.8; }
+  .btn-secondary-gray:disabled { color: var(--neutral-lighter); }
+
+  .btn-ghost {
+    background: transparent; color: var(--neutral-darker); border-color: transparent;
+    box-shadow: none; font-size: 12px;
+  }
+  .btn-ghost:hover { background: var(--primary-pale); color: var(--primary-light); }
+  .btn-ghost:disabled { background: white; color: var(--neutral-light); }
+
+  .btn-link {
+    background: transparent; color: var(--primary-base); border-color: transparent;
+    box-shadow: none;
+  }
+  .btn-link:hover { color: var(--primary-light); }
+  .btn-link:disabled { color: var(--neutral-light); }
+
+  .btn-reset {
+    background: transparent; color: var(--primary-base); border-color: transparent;
+    box-shadow: none; font-weight: 600; font-size: 12px; text-align: left; justify-content: flex-start;
+  }
+  .btn-reset:hover { color: var(--primary-light); }
+  .btn-reset:disabled { color: var(--neutral-light); }
+
+  .btn-muted {
+    background: var(--neutral-pale); color: var(--neutral-base); border-color: var(--neutral-lightest);
+    box-shadow: none;
+  }
+  .btn-muted:hover { background: var(--neutral-lightest); }
+  .btn-muted:disabled { opacity: 0.5; color: var(--neutral-light); }
+
+  .btn-destructive {
+    background: hsl(0, 84.2%, 60.2%); color: white; border-color: transparent;
+    box-shadow: var(--shadow-sm);
+  }
+  .btn-destructive:hover { background: hsl(0, 84.2%, 55%); }
+
+  /* ─── Inputs ─── */
+  .input-demo { display: flex; flex-direction: column; gap: 12px; max-width: 400px; }
+  .input {
+    display: flex; width: 100%;
+    font-family: 'Inter', sans-serif;
+    font-weight: 400;
+    color: var(--neutral-darkest);
+    background: white;
+    border: 1px solid var(--neutral-lightest);
+    transition: border-color 0.15s;
+    outline: none;
+  }
+  .input::placeholder { color: var(--neutral-lighter); }
+  .input:focus { border-color: var(--neutral-light); }
+  .input:disabled { cursor: not-allowed; opacity: 0.5; }
+  .input-error { border-color: var(--error-light); }
+  .input-error:focus { border-color: var(--error-light); }
+
+  .input-xs { height: 24px; font-size: 12px; border-radius: 4px; padding: 0 6px; }
+  .input-sm { height: 28px; font-size: 12px; border-radius: 4px; padding: 0 8px; }
+  .input-default { height: 32px; font-size: 14px; border-radius: 6px; padding: 0 10px; }
+  .input-md { height: 36px; font-size: 14px; border-radius: 6px; padding: 0 12px; }
+  .input-lg { height: 44px; font-size: 16px; border-radius: 8px; padding: 0 18px; }
+
+  /* ─── Badges ─── */
+  .badge {
+    display: inline-flex; align-items: center; justify-content: center;
+    font-size: 12px; font-weight: 600;
+    border-radius: 4px;
+    padding: 2px 10px;
+    transition: background 0.15s;
+  }
+  .badge-primary { background: var(--primary-base); color: white; }
+  .badge-primary:hover { opacity: 0.8; }
+  .badge-secondary { background: hsl(240, 4.8%, 95.9%); color: hsl(240, 5.9%, 10%); }
+  .badge-destructive { background: hsl(0, 84.2%, 60.2%); color: white; }
+  .badge-outline { background: transparent; border: 1px solid var(--neutral-lightest); color: var(--neutral-darkest); }
+  .badge-step {
+    background: var(--neutral-pale); color: var(--neutral-base);
+    width: 20px; height: 20px; padding: 0; font-size: 14px;
+    display: inline-flex; align-items: center; justify-content: center;
+  }
+
+  /* ─── Alerts ─── */
+  .alert {
+    border-radius: 8px; border: 1px solid;
+    box-shadow: var(--shadow-md);
+    padding: 12px 16px;
+    margin-bottom: 12px;
+    max-width: 480px;
+  }
+  .alert-title { font-weight: 500; font-size: 16px; margin-bottom: 4px; }
+  .alert-desc { font-size: 14px; opacity: 0.9; }
+  .alert-error { background: var(--error-ultrapale); border-color: var(--error-light); color: var(--error-base); }
+  .alert-warning { background: var(--warning-ultrapale); border-color: var(--warning-light); color: var(--warning-base); }
+  .alert-success { background: var(--success-ultrapale); border-color: var(--success-base); color: var(--success-base); }
+
+  /* ─── Shadows ─── */
+  .shadow-demo { display: flex; gap: 32px; flex-wrap: wrap; }
+  .shadow-card {
+    width: 160px; height: 100px;
+    background: white; border-radius: 12px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 13px; font-weight: 500; color: var(--neutral-dark);
+  }
+
+  /* ─── Animations ─── */
+  @keyframes fade-in { from { opacity: 0; } to { opacity: 1; } }
+  @keyframes rotate-360 { from { rotate: 0deg; } to { rotate: 360deg; } }
+  @keyframes pulse-slow { 0% { opacity: 1; } 50% { opacity: 0.3; } 100% { opacity: 1; } }
+  @keyframes shake-x { 0%, 100% { transform: translateX(-10%); } 50% { transform: translateX(10%); } }
+  @keyframes shake-y { 0%, 100% { transform: translateY(-10%); } 50% { transform: translateY(10%); } }
+  @keyframes progress-pulse { from { transform: translateX(-100%); } to { transform: translateX(100%); } }
+
+  .anim-demo { display: flex; gap: 24px; flex-wrap: wrap; align-items: center; }
+  .anim-box {
+    width: 48px; height: 48px;
+    background: var(--primary-base);
+    border-radius: 8px;
+    display: flex; align-items: center; justify-content: center;
+    color: white; font-size: 10px; font-weight: 600;
+  }
+  .anim-box.paused { animation-play-state: paused; }
+  .anim-box:hover { animation-play-state: running; }
+  .anim-item { display: flex; flex-direction: column; align-items: center; gap: 8px; }
+  .anim-label { font-size: 11px; color: var(--neutral-dark); font-family: monospace; }
+
+  .a-fade { animation: fade-in 1.5s ease-out infinite alternate; }
+  .a-rotate { animation: rotate-360 2s infinite linear; }
+  .a-pulse { animation: pulse-slow 1.5s infinite linear; }
+  .a-shake-x { animation: shake-x 0.8s ease-in-out infinite; }
+  .a-shake-y { animation: shake-y 0.8s ease-in-out infinite; }
+
+  /* ─── Progress Bar ─── */
+  .progress-bar {
+    height: 8px; background: var(--neutral-pale); border-radius: 999px; overflow: hidden;
+    position: relative; width: 300px;
+  }
+  .progress-bar-fill {
+    height: 100%; background: var(--primary-base); border-radius: 999px;
+    transition: width 0.3s;
+  }
+  .progress-bar-pulse {
+    position: absolute; top: 0; left: 0; height: 100%; width: 50%;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
+    animation: progress-pulse 3s infinite linear;
+  }
+
+  /* ─── Utility Classes Demo ─── */
+  .util-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 12px; }
+  .util-card {
+    background: white; border-radius: 8px; padding: 12px 16px;
+    border: 1px solid var(--neutral-pale);
+    font-size: 12px;
+  }
+  .util-card code {
+    font-family: monospace; font-size: 12px; font-weight: 600;
+    color: var(--primary-dark); background: var(--primary-ultrapale);
+    padding: 2px 6px; border-radius: 4px;
+    display: inline-block; margin-bottom: 4px;
+  }
+  .util-card p { color: var(--neutral-dark); font-size: 11px; }
+
+  /* ─── Component list ─── */
+  .component-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 8px; }
+  .component-chip {
+    background: white; border: 1px solid var(--neutral-pale);
+    border-radius: 6px; padding: 8px 12px;
+    font-size: 13px; font-weight: 500;
+    transition: all 0.15s;
+    cursor: default;
+  }
+  .component-chip:hover {
+    border-color: var(--primary-light);
+    background: var(--primary-ultrapale);
+  }
+  .component-chip .cat { font-size: 10px; color: var(--neutral-light); display: block; margin-top: 2px; }
+
+  /* ─── Tabs demo ─── */
+  .tabs { display: flex; gap: 0; border-bottom: 1px solid var(--neutral-lightest); margin-bottom: 16px; }
+  .tab {
+    padding: 8px 16px; font-size: 14px; font-weight: 500;
+    color: var(--neutral-dark); cursor: pointer;
+    border-bottom: 2px solid transparent;
+    transition: all 0.15s;
+    background: none; border-top: none; border-left: none; border-right: none;
+    font-family: 'Inter', sans-serif;
+  }
+  .tab:hover { color: var(--primary-light); }
+  .tab.active { color: var(--primary-base); border-bottom-color: var(--primary-base); }
+
+  /* ─── Switch / Checkbox / Radio ─── */
+  .toggle-row { display: flex; gap: 32px; align-items: center; flex-wrap: wrap; }
+  .toggle-item { display: flex; align-items: center; gap: 8px; font-size: 14px; }
+
+  .switch {
+    position: relative; width: 40px; height: 22px;
+    background: var(--neutral-lightest); border-radius: 999px;
+    cursor: pointer; transition: background 0.2s;
+    border: none; padding: 0;
+  }
+  .switch::after {
+    content: ''; position: absolute;
+    width: 18px; height: 18px;
+    background: white; border-radius: 50%;
+    top: 2px; left: 2px;
+    transition: transform 0.2s;
+    box-shadow: 0 1px 3px rgb(0 0 0 / 0.2);
+  }
+  .switch.on { background: var(--primary-base); }
+  .switch.on::after { transform: translateX(18px); }
+
+  .checkbox-custom {
+    width: 18px; height: 18px;
+    border: 2px solid var(--neutral-lightest);
+    border-radius: 4px;
+    cursor: pointer; transition: all 0.15s;
+    display: flex; align-items: center; justify-content: center;
+    background: white;
+  }
+  .checkbox-custom.checked {
+    background: var(--primary-base); border-color: var(--primary-base);
+  }
+  .checkbox-custom.checked::after {
+    content: ''; width: 5px; height: 9px;
+    border: solid white; border-width: 0 2px 2px 0;
+    transform: rotate(45deg); margin-top: -2px;
+  }
+
+  .radio-custom {
+    width: 18px; height: 18px;
+    border: 2px solid var(--neutral-lightest);
+    border-radius: 50%;
+    cursor: pointer; transition: all 0.15s;
+    display: flex; align-items: center; justify-content: center;
+    background: white;
+  }
+  .radio-custom.checked { border-color: var(--primary-base); }
+  .radio-custom.checked::after {
+    content: ''; width: 10px; height: 10px;
+    background: var(--primary-base); border-radius: 50%;
+  }
+
+  /* ─── Card demo ─── */
+  .card-demo {
+    background: white; border-radius: 12px;
+    box-shadow: var(--shadow-default);
+    padding: 24px; max-width: 360px;
+  }
+  .card-demo h3 { font-size: 16px; font-weight: 600; margin-bottom: 8px; }
+  .card-demo p { font-size: 14px; color: var(--neutral-dark); margin-bottom: 16px; }
+
+  /* ─── Tooltip ─── */
+  .tooltip-trigger {
+    position: relative; display: inline-block;
+    border-bottom: 1px dashed var(--neutral-lighter);
+    cursor: help;
+  }
+  .tooltip-trigger .tooltip-content {
+    visibility: hidden; opacity: 0;
+    position: absolute; bottom: calc(100% + 8px); left: 50%; transform: translateX(-50%);
+    background: var(--neutral-darkest); color: white;
+    padding: 6px 12px; border-radius: 6px;
+    font-size: 12px; white-space: nowrap;
+    transition: opacity 0.15s;
+    pointer-events: none;
+  }
+  .tooltip-trigger .tooltip-content::after {
+    content: ''; position: absolute;
+    top: 100%; left: 50%; transform: translateX(-50%);
+    border: 5px solid transparent;
+    border-top-color: var(--neutral-darkest);
+  }
+  .tooltip-trigger:hover .tooltip-content { visibility: visible; opacity: 1; }
+
+  /* ─── Skeleton ─── */
+  @keyframes shimmer {
+    0% { background-position: -200% 0; }
+    100% { background-position: 200% 0; }
+  }
+  .skeleton {
+    background: linear-gradient(90deg, var(--neutral-pale) 25%, var(--neutral-ultrapale) 50%, var(--neutral-pale) 75%);
+    background-size: 200% 100%;
+    animation: shimmer 1.5s infinite;
+    border-radius: 6px;
+  }
+
+  /* ─── Separator / Divider ─── */
+  .separator { height: 1px; background: var(--neutral-lightest); margin: 16px 0; }
+
+  /* ─── Flex / grid info tag ─── */
+  .info-tag {
+    display: inline-block;
+    background: var(--neutral-pale);
+    color: var(--neutral-dark);
+    font-size: 11px; font-family: monospace;
+    padding: 2px 8px; border-radius: 4px;
+    margin-left: 8px;
+  }
+</style>
+</head>
+<body>
+
+<div class="page">
+
+  <!-- ═══════════ Header ═══════════ -->
+  <h1 class="page-title">Dentscape Design System</h1>
+  <p class="page-subtitle">
+    shadcn/ui (New York) + Tailwind CSS + Radix UI &mdash; Font: Inter &mdash;
+    Generated from <code>dental3d_frontend_new</code> codebase
+  </p>
+
+  <!-- ═══════════ 1. Color Palette ═══════════ -->
+  <div class="section">
+    <h2 class="section-title">Color Palette</h2>
+    <p class="section-desc">5 semantic color groups, each with 9 depth levels. Click any swatch to copy the hex code.</p>
+
+    <!-- Primary -->
+    <div class="color-group">
+      <div class="color-group-label">Primary (Teal)</div>
+      <div class="color-row">
+        <div class="color-swatch dark-text" style="background:var(--primary-ultrapale)" onclick="copyHex(this)" data-hex="#F4FAFA"><span class="label">ultrapale</span><span class="hex">#F4FAFA</span></div>
+        <div class="color-swatch dark-text" style="background:var(--primary-pale)" onclick="copyHex(this)" data-hex="#E8F5F5"><span class="label">pale</span><span class="hex">#E8F5F5</span></div>
+        <div class="color-swatch dark-text" style="background:var(--primary-lightest)" onclick="copyHex(this)" data-hex="#C6E5E7"><span class="label">lightest</span><span class="hex">#C6E5E7</span></div>
+        <div class="color-swatch dark-text" style="background:var(--primary-lighter)" onclick="copyHex(this)" data-hex="#8DCBCE"><span class="label">lighter</span><span class="hex">#8DCBCE</span></div>
+        <div class="color-swatch light-text" style="background:var(--primary-light)" onclick="copyHex(this)" data-hex="#54B2B5"><span class="label">light</span><span class="hex">#54B2B5</span></div>
+        <div class="color-swatch light-text" style="background:var(--primary-base)" onclick="copyHex(this)" data-hex="#1B989D"><span class="label">base</span><span class="hex">#1B989D</span></div>
+        <div class="color-swatch light-text" style="background:var(--primary-dark)" onclick="copyHex(this)" data-hex="#147276"><span class="label">dark</span><span class="hex">#147276</span></div>
+        <div class="color-swatch light-text" style="background:var(--primary-darker)" onclick="copyHex(this)" data-hex="#0E4C4F"><span class="label">darker</span><span class="hex">#0E4C4F</span></div>
+        <div class="color-swatch light-text" style="background:var(--primary-darkest)" onclick="copyHex(this)" data-hex="#072627"><span class="label">darkest</span><span class="hex">#072627</span></div>
+      </div>
+    </div>
+
+    <!-- Success -->
+    <div class="color-group">
+      <div class="color-group-label">Success (Green)</div>
+      <div class="color-row">
+        <div class="color-swatch dark-text" style="background:var(--success-ultrapale)" onclick="copyHex(this)" data-hex="#F4FAF6"><span class="label">ultrapale</span><span class="hex">#F4FAF6</span></div>
+        <div class="color-swatch dark-text" style="background:var(--success-pale)" onclick="copyHex(this)" data-hex="#E8F5EC"><span class="label">pale</span><span class="hex">#E8F5EC</span></div>
+        <div class="color-swatch dark-text" style="background:var(--success-lightest)" onclick="copyHex(this)" data-hex="#C6E7D0"><span class="label">lightest</span><span class="hex">#C6E7D0</span></div>
+        <div class="color-swatch dark-text" style="background:var(--success-lighter)" onclick="copyHex(this)" data-hex="#8DCEA1"><span class="label">lighter</span><span class="hex">#8DCEA1</span></div>
+        <div class="color-swatch light-text" style="background:var(--success-light)" onclick="copyHex(this)" data-hex="#54B573"><span class="label">light</span><span class="hex">#54B573</span></div>
+        <div class="color-swatch light-text" style="background:var(--success-base)" onclick="copyHex(this)" data-hex="#1B9D44"><span class="label">base</span><span class="hex">#1B9D44</span></div>
+        <div class="color-swatch light-text" style="background:var(--success-dark)" onclick="copyHex(this)" data-hex="#147633"><span class="label">dark</span><span class="hex">#147633</span></div>
+        <div class="color-swatch light-text" style="background:var(--success-darker)" onclick="copyHex(this)" data-hex="#0E4F22"><span class="label">darker</span><span class="hex">#0E4F22</span></div>
+        <div class="color-swatch light-text" style="background:var(--success-darkest)" onclick="copyHex(this)" data-hex="#082F14"><span class="label">darkest</span><span class="hex">#082F14</span></div>
+      </div>
+    </div>
+
+    <!-- Warning -->
+    <div class="color-group">
+      <div class="color-group-label">Warning (Orange)</div>
+      <div class="color-row">
+        <div class="color-swatch dark-text" style="background:var(--warning-ultrapale)" onclick="copyHex(this)" data-hex="#FFFAF4"><span class="label">ultrapale</span><span class="hex">#FFFAF4</span></div>
+        <div class="color-swatch dark-text" style="background:var(--warning-pale)" onclick="copyHex(this)" data-hex="#FEF4E8"><span class="label">pale</span><span class="hex">#FEF4E8</span></div>
+        <div class="color-swatch dark-text" style="background:var(--warning-lightest)" onclick="copyHex(this)" data-hex="#FDE4C6"><span class="label">lightest</span><span class="hex">#FDE4C6</span></div>
+        <div class="color-swatch dark-text" style="background:var(--warning-lighter)" onclick="copyHex(this)" data-hex="#FBC98D"><span class="label">lighter</span><span class="hex">#FBC98D</span></div>
+        <div class="color-swatch light-text" style="background:var(--warning-light)" onclick="copyHex(this)" data-hex="#F8AE54"><span class="label">light</span><span class="hex">#F8AE54</span></div>
+        <div class="color-swatch light-text" style="background:var(--warning-base)" onclick="copyHex(this)" data-hex="#F6931B"><span class="label">base</span><span class="hex">#F6931B</span></div>
+        <div class="color-swatch light-text" style="background:var(--warning-dark)" onclick="copyHex(this)" data-hex="#B86F16"><span class="label">dark</span><span class="hex">#B86F16</span></div>
+        <div class="color-swatch light-text" style="background:var(--warning-darker)" onclick="copyHex(this)" data-hex="#8A5311"><span class="label">darker</span><span class="hex">#8A5311</span></div>
+        <div class="color-swatch light-text" style="background:var(--warning-darkest)" onclick="copyHex(this)" data-hex="#5C380B"><span class="label">darkest</span><span class="hex">#5C380B</span></div>
+      </div>
+    </div>
+
+    <!-- Error -->
+    <div class="color-group">
+      <div class="color-group-label">Error (Red)</div>
+      <div class="color-row">
+        <div class="color-swatch dark-text" style="background:var(--error-ultrapale)" onclick="copyHex(this)" data-hex="#FDF5F4"><span class="label">ultrapale</span><span class="hex">#FDF5F4</span></div>
+        <div class="color-swatch dark-text" style="background:var(--error-pale)" onclick="copyHex(this)" data-hex="#FBEBEA"><span class="label">pale</span><span class="hex">#FBEBEA</span></div>
+        <div class="color-swatch dark-text" style="background:var(--error-lightest)" onclick="copyHex(this)" data-hex="#F5CECA"><span class="label">lightest</span><span class="hex">#F5CECA</span></div>
+        <div class="color-swatch dark-text" style="background:var(--error-lighter)" onclick="copyHex(this)" data-hex="#EB9D96"><span class="label">lighter</span><span class="hex">#EB9D96</span></div>
+        <div class="color-swatch light-text" style="background:var(--error-light)" onclick="copyHex(this)" data-hex="#E06C62"><span class="label">light</span><span class="hex">#E06C62</span></div>
+        <div class="color-swatch light-text" style="background:var(--error-base)" onclick="copyHex(this)" data-hex="#D63B2D"><span class="label">base</span><span class="hex">#D63B2D</span></div>
+        <div class="color-swatch light-text" style="background:var(--error-dark)" onclick="copyHex(this)" data-hex="#A02C22"><span class="label">dark</span><span class="hex">#A02C22</span></div>
+        <div class="color-swatch light-text" style="background:var(--error-darker)" onclick="copyHex(this)" data-hex="#6B1E17"><span class="label">darker</span><span class="hex">#6B1E17</span></div>
+        <div class="color-swatch light-text" style="background:var(--error-darkest)" onclick="copyHex(this)" data-hex="#360F0B"><span class="label">darkest</span><span class="hex">#360F0B</span></div>
+      </div>
+    </div>
+
+    <!-- Neutral -->
+    <div class="color-group">
+      <div class="color-group-label">Neutral (Gray)</div>
+      <div class="color-row">
+        <div class="color-swatch dark-text" style="background:var(--neutral-white); border:1px solid #eee" onclick="copyHex(this)" data-hex="#FFFFFF"><span class="label">white</span><span class="hex">#FFFFFF</span></div>
+        <div class="color-swatch dark-text" style="background:var(--neutral-ultrapale)" onclick="copyHex(this)" data-hex="#F9F9F9"><span class="label">ultrapale</span><span class="hex">#F9F9F9</span></div>
+        <div class="color-swatch dark-text" style="background:var(--neutral-pale)" onclick="copyHex(this)" data-hex="#F2F2F2"><span class="label">pale</span><span class="hex">#F2F2F2</span></div>
+        <div class="color-swatch dark-text" style="background:var(--neutral-lightest)" onclick="copyHex(this)" data-hex="#DFDFDF"><span class="label">lightest</span><span class="hex">#DFDFDF</span></div>
+        <div class="color-swatch dark-text" style="background:var(--neutral-lighter)" onclick="copyHex(this)" data-hex="#BFBFBF"><span class="label">lighter</span><span class="hex">#BFBFBF</span></div>
+        <div class="color-swatch light-text" style="background:var(--neutral-light)" onclick="copyHex(this)" data-hex="#A0A0A0"><span class="label">light</span><span class="hex">#A0A0A0</span></div>
+        <div class="color-swatch light-text" style="background:var(--neutral-base)" onclick="copyHex(this)" data-hex="#808080"><span class="label">base</span><span class="hex">#808080</span></div>
+        <div class="color-swatch light-text" style="background:var(--neutral-dark)" onclick="copyHex(this)" data-hex="#606060"><span class="label">dark</span><span class="hex">#606060</span></div>
+        <div class="color-swatch light-text" style="background:var(--neutral-darker)" onclick="copyHex(this)" data-hex="#4D4D4D"><span class="label">darker</span><span class="hex">#4D4D4D</span></div>
+        <div class="color-swatch light-text" style="background:var(--neutral-darkest)" onclick="copyHex(this)" data-hex="#202020"><span class="label">darkest</span><span class="hex">#202020</span></div>
+        <div class="color-swatch light-text" style="background:var(--neutral-black)" onclick="copyHex(this)" data-hex="#000000"><span class="label">black</span><span class="hex">#000000</span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══════════ 2. Typography ═══════════ -->
+  <div class="section">
+    <h2 class="section-title">Typography</h2>
+    <p class="section-desc">Font: Inter (Google Fonts). Weight range: 100-900.</p>
+
+    <div class="subsection">
+      <div class="subsection-title">Size Scale</div>
+      <div class="type-sample"><span class="type-label">text-xs / 12px</span><span style="font-size:12px">The quick brown fox jumps over the lazy dog</span></div>
+      <div class="type-sample"><span class="type-label">text-sm / 14px</span><span style="font-size:14px">The quick brown fox jumps over the lazy dog</span></div>
+      <div class="type-sample"><span class="type-label">text-base / 16px</span><span style="font-size:16px">The quick brown fox jumps over the lazy dog</span></div>
+      <div class="type-sample"><span class="type-label">text-lg / 18px</span><span style="font-size:18px">The quick brown fox jumps over the lazy dog</span></div>
+      <div class="type-sample"><span class="type-label">text-xl / 20px</span><span style="font-size:20px">The quick brown fox jumps over the lazy dog</span></div>
+      <div class="type-sample"><span class="type-label">text-2xl / 24px</span><span style="font-size:24px">The quick brown fox jumps</span></div>
+      <div class="type-sample"><span class="type-label">text-3xl / 30px</span><span style="font-size:30px">The quick brown fox</span></div>
+    </div>
+
+    <div class="subsection">
+      <div class="subsection-title">Font Weight</div>
+      <div class="type-sample"><span class="type-label">100 Thin</span><span style="font-size:18px;font-weight:100">Dentscape AI-powered dental CAD</span></div>
+      <div class="type-sample"><span class="type-label">300 Light</span><span style="font-size:18px;font-weight:300">Dentscape AI-powered dental CAD</span></div>
+      <div class="type-sample"><span class="type-label">400 Regular</span><span style="font-size:18px;font-weight:400">Dentscape AI-powered dental CAD</span></div>
+      <div class="type-sample"><span class="type-label">500 Medium</span><span style="font-size:18px;font-weight:500">Dentscape AI-powered dental CAD</span></div>
+      <div class="type-sample"><span class="type-label">600 Semibold</span><span style="font-size:18px;font-weight:600">Dentscape AI-powered dental CAD</span></div>
+      <div class="type-sample"><span class="type-label">700 Bold</span><span style="font-size:18px;font-weight:700">Dentscape AI-powered dental CAD</span></div>
+      <div class="type-sample"><span class="type-label">900 Black</span><span style="font-size:18px;font-weight:900">Dentscape AI-powered dental CAD</span></div>
+    </div>
+  </div>
+
+  <!-- ═══════════ 3. Buttons ═══════════ -->
+  <div class="section">
+    <h2 class="section-title">Buttons</h2>
+    <p class="section-desc">10 variants &times; 5 sizes. Hover to see interactive states. Click for active scale effect.</p>
+
+    <div class="subsection">
+      <div class="subsection-title">Variants <span class="info-tag">default size (32px)</span></div>
+      <div class="btn-grid">
+        <button class="btn btn-default btn-primary">Primary</button>
+        <button class="btn btn-default btn-outline">Outline</button>
+        <button class="btn btn-default btn-secondary">Secondary</button>
+        <button class="btn btn-default btn-secondary-gray">Secondary Gray</button>
+        <button class="btn btn-default btn-ghost">Ghost</button>
+        <button class="btn btn-default btn-link">Link</button>
+        <button class="btn btn-default btn-reset">Reset</button>
+        <button class="btn btn-default btn-muted">Muted</button>
+        <button class="btn btn-default btn-destructive">Destructive</button>
+      </div>
+    </div>
+
+    <div class="subsection">
+      <div class="subsection-title">Sizes <span class="info-tag">primary variant</span></div>
+      <div class="btn-grid">
+        <button class="btn btn-xs btn-primary">XS (24px)</button>
+        <button class="btn btn-sm btn-primary">SM (28px)</button>
+        <button class="btn btn-default btn-primary">Default (32px)</button>
+        <button class="btn btn-md btn-primary">MD (36px)</button>
+        <button class="btn btn-lg btn-primary">LG (44px)</button>
+      </div>
+    </div>
+
+    <div class="subsection">
+      <div class="subsection-title">Disabled State</div>
+      <div class="btn-grid">
+        <button class="btn btn-default btn-primary" disabled>Primary</button>
+        <button class="btn btn-default btn-outline" disabled>Outline</button>
+        <button class="btn btn-default btn-secondary" disabled>Secondary</button>
+        <button class="btn btn-default btn-secondary-gray" disabled>Sec. Gray</button>
+        <button class="btn btn-default btn-ghost" disabled>Ghost</button>
+        <button class="btn btn-default btn-link" disabled>Link</button>
+        <button class="btn btn-default btn-muted" disabled>Muted</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══════════ 4. Inputs ═══════════ -->
+  <div class="section">
+    <h2 class="section-title">Inputs</h2>
+    <p class="section-desc">2 variants (default, error) &times; 5 sizes. Focus to see border transition.</p>
+
+    <div class="subsection">
+      <div class="subsection-title">Sizes</div>
+      <div class="input-demo">
+        <input class="input input-xs" placeholder="XS input (24px)">
+        <input class="input input-sm" placeholder="SM input (28px)">
+        <input class="input input-default" placeholder="Default input (32px)">
+        <input class="input input-md" placeholder="MD input (36px)">
+        <input class="input input-lg" placeholder="LG input (44px)">
+      </div>
+    </div>
+
+    <div class="subsection" style="margin-top:24px">
+      <div class="subsection-title">States</div>
+      <div class="input-demo">
+        <input class="input input-default" placeholder="Normal state">
+        <input class="input input-default" value="With value">
+        <input class="input input-default input-error" placeholder="Error state">
+        <input class="input input-default" placeholder="Disabled" disabled>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══════════ 5. Badges ═══════════ -->
+  <div class="section">
+    <h2 class="section-title">Badges</h2>
+    <div class="btn-grid">
+      <span class="badge badge-primary">Primary</span>
+      <span class="badge badge-secondary">Secondary</span>
+      <span class="badge badge-destructive">Destructive</span>
+      <span class="badge badge-outline">Outline</span>
+      <span class="badge badge-step">1</span>
+      <span class="badge badge-step">2</span>
+      <span class="badge badge-step">3</span>
+    </div>
+  </div>
+
+  <!-- ═══════════ 6. Alerts ═══════════ -->
+  <div class="section">
+    <h2 class="section-title">Alerts</h2>
+    <div class="alert alert-error">
+      <div class="alert-title">Error</div>
+      <div class="alert-desc">Something went wrong with your case upload.</div>
+    </div>
+    <div class="alert alert-warning">
+      <div class="alert-title">Warning</div>
+      <div class="alert-desc">This case has incomplete scan data.</div>
+    </div>
+    <div class="alert alert-success">
+      <div class="alert-title">Success</div>
+      <div class="alert-desc">Crown design generated successfully.</div>
+    </div>
+  </div>
+
+  <!-- ═══════════ 7. Toggles / Controls ═══════════ -->
+  <div class="section">
+    <h2 class="section-title">Toggle Controls</h2>
+    <p class="section-desc">Switch, Checkbox, Radio. Click to toggle.</p>
+    <div class="toggle-row">
+      <div class="toggle-item">
+        <button class="switch on" onclick="this.classList.toggle('on')"></button>
+        <span>Auto-detect</span>
+      </div>
+      <div class="toggle-item">
+        <button class="switch" onclick="this.classList.toggle('on')"></button>
+        <span>Dark mode</span>
+      </div>
+      <div class="toggle-item">
+        <div class="checkbox-custom checked" onclick="this.classList.toggle('checked')"></div>
+        <span>Batch export</span>
+      </div>
+      <div class="toggle-item">
+        <div class="checkbox-custom" onclick="this.classList.toggle('checked')"></div>
+        <span>Send notification</span>
+      </div>
+      <div class="toggle-item">
+        <div class="radio-custom checked" onclick="this.classList.toggle('checked')"></div>
+        <span>FDI notation</span>
+      </div>
+      <div class="toggle-item">
+        <div class="radio-custom" onclick="this.classList.toggle('checked')"></div>
+        <span>Universal notation</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══════════ 8. Tabs ═══════════ -->
+  <div class="section">
+    <h2 class="section-title">Tabs</h2>
+    <div class="tabs" id="demo-tabs">
+      <button class="tab active" onclick="switchTab(this)">My Cases</button>
+      <button class="tab" onclick="switchTab(this)">Archived</button>
+      <button class="tab" onclick="switchTab(this)">Analytics</button>
+      <button class="tab" onclick="switchTab(this)">Settings</button>
+    </div>
+    <p style="font-size:14px;color:var(--neutral-dark)">Click tabs to see active state transition.</p>
+  </div>
+
+  <!-- ═══════════ 9. Card + Tooltip ═══════════ -->
+  <div class="section">
+    <h2 class="section-title">Card &amp; Tooltip</h2>
+    <div style="display:flex;gap:32px;flex-wrap:wrap;align-items:flex-start">
+      <div class="card-demo">
+        <h3>Case #12345</h3>
+        <p>Crown design for tooth #36. AI confidence: 94%. Review the
+          <span class="tooltip-trigger">
+            margin line
+            <span class="tooltip-content">The boundary between the crown and the prepared tooth</span>
+          </span>
+          before export.</p>
+        <div style="display:flex;gap:8px">
+          <button class="btn btn-sm btn-primary">Approve</button>
+          <button class="btn btn-sm btn-outline">Edit</button>
+          <button class="btn btn-sm btn-ghost">Skip</button>
+        </div>
+      </div>
+
+      <div>
+        <div class="subsection-title">Skeleton Loading</div>
+        <div style="width:300px;display:flex;flex-direction:column;gap:8px">
+          <div class="skeleton" style="height:16px;width:60%"></div>
+          <div class="skeleton" style="height:12px;width:100%"></div>
+          <div class="skeleton" style="height:12px;width:85%"></div>
+          <div class="skeleton" style="height:36px;width:100%;margin-top:8px;border-radius:8px"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══════════ 10. Progress ═══════════ -->
+  <div class="section">
+    <h2 class="section-title">Progress</h2>
+    <div style="display:flex;flex-direction:column;gap:16px">
+      <div>
+        <div style="font-size:13px;margin-bottom:4px;color:var(--neutral-dark)">Determinate (65%)</div>
+        <div class="progress-bar"><div class="progress-bar-fill" style="width:65%"></div></div>
+      </div>
+      <div>
+        <div style="font-size:13px;margin-bottom:4px;color:var(--neutral-dark)">Indeterminate</div>
+        <div class="progress-bar"><div class="progress-bar-pulse"></div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══════════ 11. Shadows ═══════════ -->
+  <div class="section">
+    <h2 class="section-title">Box Shadows</h2>
+    <p class="section-desc">4-level shadow system for elevation hierarchy.</p>
+    <div class="shadow-demo">
+      <div class="shadow-card" style="box-shadow:var(--shadow-sm)">shadow-sm</div>
+      <div class="shadow-card" style="box-shadow:var(--shadow-default)">shadow (default)</div>
+      <div class="shadow-card" style="box-shadow:var(--shadow-md)">shadow-md</div>
+      <div class="shadow-card" style="box-shadow:var(--shadow-lg)">shadow-lg</div>
+    </div>
+  </div>
+
+  <!-- ═══════════ 12. Animations ═══════════ -->
+  <div class="section">
+    <h2 class="section-title">Animations</h2>
+    <p class="section-desc">Hover each box to play. 14 custom keyframe animations defined in Tailwind config.</p>
+    <div class="anim-demo">
+      <div class="anim-item">
+        <div class="anim-box a-fade paused"></div>
+        <span class="anim-label">fade-in</span>
+      </div>
+      <div class="anim-item">
+        <div class="anim-box a-rotate paused"></div>
+        <span class="anim-label">rotate-360</span>
+      </div>
+      <div class="anim-item">
+        <div class="anim-box a-pulse paused"></div>
+        <span class="anim-label">pulse-slow</span>
+      </div>
+      <div class="anim-item">
+        <div class="anim-box a-shake-x paused"></div>
+        <span class="anim-label">shake-x</span>
+      </div>
+      <div class="anim-item">
+        <div class="anim-box a-shake-y paused"></div>
+        <span class="anim-label">shake-y</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══════════ 13. Utility Classes ═══════════ -->
+  <div class="section">
+    <h2 class="section-title">Custom Utility Classes</h2>
+    <p class="section-desc">Project-specific Tailwind utilities defined in globals.scss.</p>
+    <div class="util-grid">
+      <div class="util-card"><code>wh-full</code><p>w-full h-full</p></div>
+      <div class="util-card"><code>wh-screen</code><p>w-screen h-screen</p></div>
+      <div class="util-card"><code>flex-center</code><p>flex items-center justify-center</p></div>
+      <div class="util-card"><code>flex-x-center</code><p>flex justify-center</p></div>
+      <div class="util-card"><code>flex-y-center</code><p>flex items-center</p></div>
+      <div class="util-card"><code>panel-style</code><p>bg-white rounded-xl shadow pointer-events-auto</p></div>
+      <div class="util-card"><code>panel-block-gap</code><p>flex flex-col gap-[12px]</p></div>
+      <div class="util-card"><code>panel-left-block</code><p>min-w-[260px] + panel-block-gap</p></div>
+      <div class="util-card"><code>panel-right-block</code><p>w-[256px] + panel-block-gap + ml-auto</p></div>
+      <div class="util-card"><code>absolute-center</code><p>absolute top-50% left-50% translate(-50%,-50%)</p></div>
+      <div class="util-card"><code>custom-scrollbar</code><p>Thin scrollbar, fade on hover</p></div>
+      <div class="util-card"><code>scrollbar-hide</code><p>Hides scrollbar (all browsers)</p></div>
+    </div>
+  </div>
+
+  <!-- ═══════════ 14. Component Inventory ═══════════ -->
+  <div class="section">
+    <h2 class="section-title">Component Inventory</h2>
+    <p class="section-desc">35+ shadcn/ui components in <code>src/components/ui/</code>. MUI used only for icons (~180 imports from @mui/icons-material).</p>
+    <div class="component-grid">
+      <div class="component-chip">Button<span class="cat">Interactive</span></div>
+      <div class="component-chip">Input<span class="cat">Interactive</span></div>
+      <div class="component-chip">Select<span class="cat">Interactive</span></div>
+      <div class="component-chip">Tabs<span class="cat">Interactive</span></div>
+      <div class="component-chip">Checkbox<span class="cat">Interactive</span></div>
+      <div class="component-chip">RadioGroup<span class="cat">Interactive</span></div>
+      <div class="component-chip">Switch<span class="cat">Interactive</span></div>
+      <div class="component-chip">Slider<span class="cat">Interactive</span></div>
+      <div class="component-chip">Textarea<span class="cat">Interactive</span></div>
+      <div class="component-chip">PasswordInput<span class="cat">Interactive</span></div>
+      <div class="component-chip">PhoneInput<span class="cat">Interactive</span></div>
+      <div class="component-chip">Alert<span class="cat">Display</span></div>
+      <div class="component-chip">Badge<span class="cat">Display</span></div>
+      <div class="component-chip">Avatar<span class="cat">Display</span></div>
+      <div class="component-chip">Card<span class="cat">Display</span></div>
+      <div class="component-chip">Skeleton<span class="cat">Display</span></div>
+      <div class="component-chip">Separator<span class="cat">Display</span></div>
+      <div class="component-chip">Progress<span class="cat">Display</span></div>
+      <div class="component-chip">Table<span class="cat">Display</span></div>
+      <div class="component-chip">Dialog<span class="cat">Overlay</span></div>
+      <div class="component-chip">AlertDialog<span class="cat">Overlay</span></div>
+      <div class="component-chip">Drawer<span class="cat">Overlay</span></div>
+      <div class="component-chip">Popover<span class="cat">Overlay</span></div>
+      <div class="component-chip">Tooltip<span class="cat">Overlay</span></div>
+      <div class="component-chip">DropdownMenu<span class="cat">Overlay</span></div>
+      <div class="component-chip">Menubar<span class="cat">Overlay</span></div>
+      <div class="component-chip">NavigationMenu<span class="cat">Overlay</span></div>
+      <div class="component-chip">Command<span class="cat">Overlay</span></div>
+      <div class="component-chip">Toast / Toaster<span class="cat">Overlay</span></div>
+      <div class="component-chip">Accordion<span class="cat">Other</span></div>
+      <div class="component-chip">Calendar<span class="cat">Other</span></div>
+      <div class="component-chip">Carousel<span class="cat">Other</span></div>
+      <div class="component-chip">Form<span class="cat">Other</span></div>
+      <div class="component-chip">Label<span class="cat">Other</span></div>
+      <div class="component-chip">ScrollArea<span class="cat">Other</span></div>
+    </div>
+  </div>
+
+  <!-- ═══════════ Footer ═══════════ -->
+  <div class="separator"></div>
+  <p style="font-size:12px;color:var(--neutral-light);text-align:center;padding:16px 0">
+    Generated from <strong>dental3d_frontend_new</strong> codebase &mdash;
+    shadcn/ui (New York) + Tailwind CSS + Radix UI &mdash;
+    Last synced: 2026-04-01
+  </p>
+</div>
+
+<div class="copied-toast" id="toast">Copied!</div>
+
+<script>
+  function copyHex(el) {
+    const hex = el.dataset.hex;
+    navigator.clipboard.writeText(hex).then(() => {
+      const toast = document.getElementById('toast');
+      toast.textContent = 'Copied ' + hex;
+      toast.classList.add('show');
+      setTimeout(() => toast.classList.remove('show'), 1200);
+    });
+  }
+
+  function switchTab(el) {
+    el.parentElement.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+    el.classList.add('active');
+  }
+</script>
+
+</body>
+</html>
